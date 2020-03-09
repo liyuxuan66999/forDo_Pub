@@ -30,15 +30,36 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String
 });
+
+
+const projectSchema = new mongoose.Schema({
+    title: String,
+    status: String,
+    owner: String,
+    assignee: String,
+    jira: String,
+    palamida: String
+    //comments: [String]
+});
+
 //hash salt password and save user into mongodb
 userSchema.plugin(passportLocalMongoose);
 const User = new mongoose.model("User", userSchema);
+const Project = new mongoose.model("Project", projectSchema);
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.get("/projects", function(req, res){
-    res.send({express:'express server is up'});
+    Project.find({}, function(err, foundProjects){
+        if(err){
+            res.send({express:err});
+        }else{
+            res.send(foundProjects);
+        }
+    });
+
+    
 });
 app.get("/register", function(req, res){
     res.send({lol:'bs'});
@@ -59,8 +80,8 @@ app.post("/register", function(req, res){
 
 app.post("/login", function(req,res){
     const {email, password} = req.body.post;
-    console.log(email);
-    console.log(password);
+    // const email = req.body.username;
+    // const password = req.body.password;
     const user = new User({
         username: email,
         password: password
@@ -73,10 +94,28 @@ app.post("/login", function(req,res){
         } else{
             passport.authenticate("local")(req, res, function(){
                 
-                res.send("logged in!");
+                res.send("OK");
             });
         }
     });
+});
+
+app.post("/project", function(req,res){
+    console.log(req);
+    const {title, status, owner, assignee, jira, palamida} = req.body;
+    //const projTitle = __.capitalize(title);
+    const insertProj = new Project({
+        title: title, 
+        status: status,
+        owner: owner,
+        assignee: assignee,
+        jira: jira,
+        palamida: palamida
+        //comments: comments
+    });
+    insertProj.save();
+    res.send("/home")
+
 });
 
 app.listen(port, function(){

@@ -1,35 +1,41 @@
-import React, { Component } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import GetprojectsProx from "../GetprojectsProx";
 
-class Getprojects extends Component {
-    state = {
-        fetchedRes: ''
+function Getprojects(){
+    useEffect(() => {
+        fetchProjects();
+    }, []);
+
+    const [projects, setProj] = useState([]);
+    const [isExpanded, setExpanded] = useState(false);
+
+    const fetchProjects = async() => {
+        const data = await fetch('/projects');
+        const projects = await data.json();
+        //console.log(projects);
+        setProj(projects);
+    };
+    function expand(){
+        setExpanded(!isExpanded);
     }
 
-    getResponse = async() => {
-        const response = await fetch('/projects');
-        const body = await response.json();
-        if(response.status !== 200) throw Error(body.message);
-
-        return body;
-    }
-
-    componentDidMount() {
-        this.getResponse()
-            .then(res => {
-                const Data = res;
-                this.setState({fetchedRes: Data});
-            })
-    }
-
-    render(){
-        const {fetchedRes} = this.state;
-        return (
-            <GetprojectsProx projects={fetchedRes.express} />
-        );
-    }
-  
+    return(
+        <div>
+            {projects.map(project => (
+                <div className="note">
+                    <h1 onClick={expand}>{project.title}</h1>
+                {isExpanded ?(
+                    <div>
+                    <p>{project.status}</p>
+                    <p>{project.owner}</p>
+                    </div>):null}
+                
+                </div>
+            ))}
+        </div>
+    )
 }
+
+
 
 export default Getprojects;
