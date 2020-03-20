@@ -1,22 +1,27 @@
-import React, {Component} from "react";
-import Getprojects from "./ExpressProxy/Getprojects";
+import React from "react";
+
 import Postregister from "./ExpressProxy/Postregister";
 import Postlogin from "./ExpressProxy/Postlogin";
 import Header from "./Header";
 import Footer from "./Footer";
 import Nav from "./Navigation";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import ProjectsLayout from "./AppLayout";
+import Test from "./ProjectsLayout";
 
-
-
-const isLoggedin = true;
 function App(){
     const isLoggedin = useSelector(state => state.auth);
-    const projects = useSelector(state => state.proj);
-     if(isLoggedin){
-         return (<Getprojects />);
-     }
+    //option 1
+    if(isLoggedin){
+        return (<Test />);
+    }
+    //
+
+    //option 2
+    //  if(isLoggedin){
+    //      return (<ProjectsLayout />);
+    //  }
 
     return (
     <Router>
@@ -27,7 +32,7 @@ function App(){
             <Route path="/register" component={Postregister}/>
             <Route component={Postlogin} />
             </Switch>
-            <h1>{projects}</h1>
+            
             
         <Footer />
     </div>

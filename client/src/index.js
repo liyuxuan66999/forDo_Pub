@@ -1,24 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import store from "./components/store";
+import { Provider } from "react-redux";
+//import AppLayout from "./components/AppLayout";
 import App from "./components/App";
-import {createStore} from "redux";
-import authenticateReducer from "./components/Reducers/authentication"
-import {Provider} from "react-redux";
-import allReducers from "./components/Reducers";
 
 //STORE -> GLOBALIZED STATE
 //try to add another reducer and test redux dev-tool
-const store = createStore(
-    allReducers,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+// const store = createStore(
+//     allReducers,
+//     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// );
 
 
 
 
 ReactDOM.render(
 <Provider store={store}>
-<App/>
+<App />
 </Provider>, 
 document.getElementById('root'));
 

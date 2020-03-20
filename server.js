@@ -55,6 +55,7 @@ app.get("/projects", function(req, res){
         if(err){
             res.send({express:err});
         }else{
+            //const sendRes = {projects: foundProjects}
             res.send(foundProjects);
         }
     });
