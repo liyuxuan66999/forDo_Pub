@@ -7,14 +7,19 @@ import Footer from "./Footer";
 import Nav from "./Navigation";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import {useSelector, useDispatch} from "react-redux";
-import ProjectsLayout from "./AppLayout";
-import Test from "./ProjectsLayout";
+//import ProjectsLayout from "./AppLayout";
+import ProjectsLayout from "./ProjectsLayout";
 
 function App(){
     const isLoggedin = useSelector(state => state.auth);
     //option 1
     if(isLoggedin){
-        return (<Test />);
+        return (
+        <div>
+            <Header />  
+            <ProjectsLayout />
+            <Footer />
+        </div>);
     }
     //
 

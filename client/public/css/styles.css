@@ -70,6 +70,61 @@ footer p {
   outline: none;
 }
 
+#todo .tile {
+  background: #e6dd37;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 60px;
+  width: 340px;
+  margin: 16px;
+  float: left;
+}
+#legalreview .tile {
+  background: #34a1db;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 60px;
+  width: 340px;
+  margin: 16px;
+  float: left;
+}
+#auditorreview .tile {
+  background: #b08ff7;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 60px;
+  width: 340px;
+  margin: 16px;
+  float: left;
+}
+#debug .tile {
+  background: #f57c3b;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 60px;
+  width: 340px;
+  margin: 16px;
+  float: left;
+}
+#closed .tile {
+  background: #36e390;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 60px;
+  width: 340px;
+  margin: 16px;
+  float: left;
+}
+.tile h1 {
+  font-size: 1.5em;
+  margin-bottom: 6px;
+}
+
+.Link {
+  font-size: 1.5em;
+  margin-bottom: 6px;
+}
+
 form.create-note {
   position: relative;
   width: 480px;
