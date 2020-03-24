@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-
 import {Link} from "react-router-dom";
+import {useSelector, useDispatch} from "react-redux";
+import Getprojects from "./ExpressProxy/Getprojects";
 //import Link from '@material-ui/core/Link';
 
 function ProjectsLayout (){
-   
-    //either use redirect and move fetch projects in redirect page or onclick to show/hide a list
+    const dispatch = useDispatch();
+    //onclick envent will only trigger dispatch once so that program will not hang there
     return(
-        <div>
+        <div onClick={() => {
+            dispatch(Getprojects());
+        }
+        }>
             <div id = "todo">
                 <div className="tile">
                 <Link className="Link" to={'/projects/Q'} > 

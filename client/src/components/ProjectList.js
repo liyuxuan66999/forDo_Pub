@@ -6,9 +6,7 @@ import { useParams } from "react-router-dom";
 function ProjectList ({match}){
     
     const status = match.params.status;
-    const dispatch = useDispatch();
-    //dispatch to update state first
-    dispatch(Getprojects());
+    
     //then useSelector will fetch updated state
     const projects = useSelector(state => state.proj.projects);
     const [isExpanded, setExpanded] = useState(false);
