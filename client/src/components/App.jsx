@@ -9,17 +9,24 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import {useSelector, useDispatch} from "react-redux";
 //import ProjectsLayout from "./AppLayout";
 import ProjectsLayout from "./ProjectsLayout";
+import ProjectList from "./ProjectList";
 
 function App(){
     const isLoggedin = useSelector(state => state.auth);
     //option 1
     if(isLoggedin){
         return (
+        <Router>
         <div>
-            <Header />  
-            <ProjectsLayout />
+            <Header />
+            <Switch>  
+            <Route path="/dashboard" exact component = {ProjectsLayout} />
+            <Route path="/projects/:status" component ={ProjectList} />
+            <Route component={ProjectsLayout} />
+            </Switch>
             <Footer />
-        </div>);
+        </div>
+        </Router>);
     }
     //
 

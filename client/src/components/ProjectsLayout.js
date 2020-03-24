@@ -1,58 +1,46 @@
 import React, { useState } from "react";
-import Getprojects from "./ExpressProxy/Getprojects";
-import {useSelector, useDispatch} from "react-redux";
-import Link from '@material-ui/core/Link';
-import ProjectList from "./ProjectList";
+
+import {Link} from "react-router-dom";
+//import Link from '@material-ui/core/Link';
 
 function ProjectsLayout (){
-    const dispatch = useDispatch();
-    //dispatch to update state first
-    dispatch(Getprojects());
-    //then useSelector will fetch updated state
-    const projects = useSelector(state => state.proj.projects);
-    const [isExpanded, setExpanded] = useState(false);
-    const todoList = [];
-    for (var i=0; i<projects.length; i++){
-        if(projects[i].status === "Q"){
-            todoList.push(projects[i]);
-        }
-    }
-    
-    function expand(){
-        setExpanded(!isExpanded);
-    }
+   
     //either use redirect and move fetch projects in redirect page or onclick to show/hide a list
     return(
         <div>
-            <div id = "todo" onClick={
-                () => {
-                    
-                }
-            }>
+            <div id = "todo">
                 <div className="tile">
-                    <h1> Todo </h1>
+                <Link className="Link" to={'/projects/Q'} > 
+                    Todo 
+                </Link>
                 </div>
             </div>
             <div id = "legalreview">
                 <div className="tile">
-                <Link className="Link" href="/projects" >
-                Legal Review
+                <Link className="Link" to={"/projects/L"} >
+                    Legal Review
                 </Link>
                 </div>
              </div>
              <div id = "debug">
                 <div className="tile">
-                    <h1>Debug</h1>
+                <Link className="Link" to={"/projects/D"} >
+                    Debug
+                </Link>
                 </div>
              </div>
              <div id = "auditorreview">
                 <div className="tile">
-                    <h1>Auditor Review</h1>
+                <Link className="Link" to={"/projects/R"} >
+                    Auditor Review
+                </Link>
                 </div>
              </div> 
              <div id = "closed">
                 <div className="tile">
-                    <h1>Closed</h1>
+                <Link className="Link" to={"/projects/C"} >
+                    Closed
+                </Link>
                 </div>
              </div> 
             {/* {projects.map(project => (
