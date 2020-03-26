@@ -5,8 +5,11 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 
+const TodoListDBSchema = require(__dirname+"/DBSchemas/ToDoListSchema.js");
+const ProjectDBSchema = require(__dirname+"/DBSchemas/ProjectSchema.js");
 const app = express();
 const port = process.env.PORT || 5000;
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -32,23 +35,16 @@ const userSchema = new mongoose.Schema({
 });
 
 
-const projectSchema = new mongoose.Schema({
-    title: String,
-    status: String,
-    owner: String,
-    assignee: String,
-    jira: String,
-    palamida: String
-    //comments: [String]
-});
 
 //hash salt password and save user into mongodb
 userSchema.plugin(passportLocalMongoose);
 const User = new mongoose.model("User", userSchema);
-const Project = new mongoose.model("Project", projectSchema);
+let Project = ProjectDBSchema.createDB(mongoose);
+let List = TodoListDBSchema.createDB(mongoose);
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 
 app.get("/projects", function(req, res){
     Project.find({}, function(err, foundProjects){
@@ -63,8 +59,29 @@ app.get("/projects", function(req, res){
     
 });
 app.get("/register", function(req, res){
-    res.send({lol:'bs'});
+    res.send({lol:'haha'});
 });
+
+app.get("/:listName", function(req,res){
+    listName = req.params.listName;
+    List.findOne({name: listName}, function(err,foundList){
+        if(err){
+            res.send(err);
+        }else{
+            if(!foundList){
+                const newList = new List({
+                    name: listName,
+                    items: []
+                });
+                newList.save();
+                res.send(newList);
+            }else{
+                res.send(foundList);
+            }
+        }
+    });
+});
+
 app.post("/register", function(req, res){
     
     const {email, password} = req.body.post;
@@ -102,7 +119,7 @@ app.post("/login", function(req,res){
 });
 
 app.post("/project", function(req,res){
-    console.log(req);
+    
     const {title, status, owner, assignee, jira, palamida} = req.body;
     //const projTitle = __.capitalize(title);
     const insertProj = new Project({
@@ -116,6 +133,20 @@ app.post("/project", function(req,res){
     });
     insertProj.save();
     res.send("/home")
+
+});
+app.post("/list", function(req,res){
+    const {name, item} = req.body;
+    List.findOne({name: name}, function(err, foundList){
+        if(err){
+            res.send(err);
+        }else{
+            foundList.items.push(item);
+            foundList.save();
+            res.send(foundList);
+        }
+    });
+
 
 });
 

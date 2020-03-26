@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {useSelector, useDispatch} from "react-redux";
-import Getprojects from "./ExpressProxy/Getprojects";
-import { useParams } from "react-router-dom";
+
+import CreateProjectCard from "./ProjectComponents/CreateProjectCard";
 
 function ProjectList ({match}){
     
@@ -9,7 +9,7 @@ function ProjectList ({match}){
     
     //then useSelector will fetch updated state
     const projects = useSelector(state => state.proj.projects);
-    const [isExpanded, setExpanded] = useState(false);
+    //const [isExpanded, setExpanded] = useState(false);
     const projList = [];
     //const {status} = useParams();
     for (var i=0; i<projects.length; i++){
@@ -18,22 +18,10 @@ function ProjectList ({match}){
         }
     }
     
-    function expand(){
-        setExpanded(!isExpanded);
-    }
+    
     return(
     <div>
-        {projList.map(project => (
-                <div className="note">
-                    <h1 onClick={expand} key={project._id}>{project.title}</h1>
-                {isExpanded ?(
-                    <div>
-                    <p>{project.status}</p>
-                    <p>{project.owner}</p>
-                    </div>):null}
-                
-                </div>
-            ))}
+        {projList.map(CreateProjectCard)}
     </div>   
     );
 }

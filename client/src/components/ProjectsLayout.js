@@ -47,17 +47,7 @@ function ProjectsLayout (){
                 </Link>
                 </div>
              </div> 
-            {/* {projects.map(project => (
-                <div className="note">
-                    <h1 onClick={expand}>{project.title}</h1>
-                {isExpanded ?(
-                    <div>
-                    <p>{project.status}</p>
-                    <p>{project.owner}</p>
-                    </div>):null}
-                
-                </div>
-            ))} */}
+            
             
         </div>
     )

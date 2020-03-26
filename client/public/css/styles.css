@@ -158,3 +158,11 @@ form.create-note button {
   cursor: pointer;
   outline: none;
 }
+
+.top {
+  border-radius: 25px 25px 0 0;
+  height: 100px;
+  width: 100%;
+  background-color: #00cec9;
+  display: flex;
+}
