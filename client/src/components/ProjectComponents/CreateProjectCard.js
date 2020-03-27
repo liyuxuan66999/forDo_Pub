@@ -8,6 +8,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import GetTodoList from '../ExpressProxy/GetTodoList';
+import {useDispatch} from "react-redux";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
@@ -16,11 +19,12 @@ const useStyles = makeStyles({
 });
 
 function CreateProjectCard(project){
+    const dispatch = useDispatch();
     function handleToDo(){
-        console.log("TODO List");
+        dispatch(GetTodoList(project.title));
     }
     function handleLearned(){
-        console.log("LEARNED!");
+        console.log("Learned");
     }
     //const classes = useStyles();
     return(
@@ -38,17 +42,15 @@ function CreateProjectCard(project){
                 </Typography>
                 <CardActions>
                     <Button size="small" color="primary" onClick={handleToDo}>
-                        to do
+                        <Link to={'/todolist'} > 
+                            Todo 
+                        </Link>
                     </Button>
                     <Button size="small" color="primary" onClick={handleLearned}>
                         learned
                     </Button>
                 </CardActions>
-                {/* <ProjectDetail 
-                    key={project._id}
-                    owner={project.owner} 
-                    status={project.status}
-                /> */}
+                
             </CardContent>
         </CardActionArea>
     </Card>);

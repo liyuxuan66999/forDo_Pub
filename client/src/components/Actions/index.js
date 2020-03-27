@@ -12,16 +12,7 @@ export function fetchProjectsPending(){
 }
 
 export function fetchProjects(data){
-    // return function(dispatch){
-    //     axios.get("/projects")
-    //         .then((response) => {
-    //             //const projects = response.data.json();
-    //             dispatch({teype: "FETCH_PROJECTS_FULLFILLED", payload: response.data})
-    //         })
-    //         .catch((err) => {
-    //             dispatch({type: "FETCH_PROJECTS_FAIL", payload: err})
-    //         })
-    // }
+   
     return {
             type: "FETCH_PROJECTS_FULLFILLED", 
             payload: data
