@@ -5,13 +5,10 @@ import Getprojects from "./ExpressProxy/Getprojects";
 //import Link from '@material-ui/core/Link';
 
 function ProjectsLayout (){
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     //onclick envent will only trigger dispatch once so that program will not hang there
     return(
-        <div onClick={() => {
-            dispatch(Getprojects());
-        }
-        }>
+        <div>
             <div id = "todo">
                 <div className="tile">
                 <Link className="Link" to={'/projects/Q'} > 

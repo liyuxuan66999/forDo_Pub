@@ -4,6 +4,7 @@ import Postregister from "./ExpressProxy/Postregister";
 import Postlogin from "./ExpressProxy/Postlogin";
 import Header from "./Header";
 import Footer from "./Footer";
+import TodoListLayout from "./ProjectComponents/TodoListComponent/TodoListLayout";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import {useSelector, useDispatch} from "react-redux";
@@ -21,7 +22,8 @@ function App(){
             <Header />
             <Switch>  
             <Route path="/dashboard" exact component = {ProjectsLayout} />
-            <Route path="/projects/:status" component ={ProjectList} />
+            <Route path="/projects/:status" component = {ProjectList} />
+            <Route path="/todolist/:projName" component = {TodoListLayout} />
             <Route component={ProjectsLayout} />
             </Switch>
             <Footer />

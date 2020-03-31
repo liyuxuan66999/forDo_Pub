@@ -1,10 +1,9 @@
 import {fetchListPending, fetchList, fetchListFail} from "../Actions/todoListAction";
 
 function GetTodoList(listName){
+    const reqUrl = '/'+listName;
     return dispatch => {
         dispatch(fetchListPending());
-        
-        const reqUrl = '/'+listName;
         return fetch (reqUrl)
         .then(res => res.json())
         .then(res => {

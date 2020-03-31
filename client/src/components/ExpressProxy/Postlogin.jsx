@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import Login from "../Login";
 import {loggedin} from "../Actions";
 import {useSelector, useDispatch}from "react-redux";   
+import Getprojects from "./Getprojects";
+import GetTodoList from "./GetTodoList";
 
 function Postlogin(){
     const user = {email: "", password: ""};
@@ -23,6 +25,8 @@ function Postlogin(){
         //const body = await res.status;
         if(body==="OK"){
             dispatch(loggedin());
+            dispatch(Getprojects());
+            
         }
         poststate.resToPost = body;
     }

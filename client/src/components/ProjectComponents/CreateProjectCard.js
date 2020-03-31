@@ -19,41 +19,55 @@ const useStyles = makeStyles({
 });
 
 function CreateProjectCard(project){
+    const redirectURL = '/todolist/' + project.title;
     const dispatch = useDispatch();
+    const [isExpanded, setExpanded] = useState(false);
+    const projTitle = project.title;
     function handleToDo(){
-        dispatch(GetTodoList(project.title));
+        dispatch(GetTodoList(projTitle));
+        setExpanded(!isExpanded);
     }
     function handleLearned(){
         console.log("Learned");
     }
+    
     //const classes = useStyles();
     return(
-    <Card className="classes.root">
+    
+    <Card className="classes.root" >
         <CardActionArea>
             <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography gutterBottom variant="h5" component="h2" onClick={handleToDo}>
                     {project.title}
                 </Typography>
+                {isExpanded ? (
+                <div>
                 <Typography variant="body2" color="textSecondary" component="p">
                     Owner: {project.owner} 
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
                     Status: {project.status} 
                 </Typography>
-                <CardActions>
-                    <Button size="small" color="primary" onClick={handleToDo}>
-                        <Link to={'/todolist'} > 
+                <CardActions >
+                    <Button size="small" color="primary" >
+                        
+                        <Link to={redirectURL} > 
                             Todo 
                         </Link>
+                        
                     </Button>
                     <Button size="small" color="primary" onClick={handleLearned}>
                         learned
                     </Button>
-                </CardActions>
+                </CardActions></div>
+                ): null}
+                
                 
             </CardContent>
         </CardActionArea>
-    </Card>);
+    </Card>
+    
+    );
 }
 
 export default CreateProjectCard;
