@@ -136,7 +136,7 @@ app.post("/project", function(req,res){
 
 });
 app.post("/list", function(req,res){
-    const {name, item} = req.body;
+    const {name, item} = req.body.post;
     List.findOne({name: name}, function(err, foundList){
         if(err){
             res.send(err);

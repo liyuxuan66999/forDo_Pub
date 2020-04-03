@@ -3,39 +3,47 @@ import {useSelector, useDispatch} from "react-redux";
 import TodoItemDetail from "./TodoItemDetail";
 import GetTodoList from '../../ExpressProxy/GetTodoList';
 import InputArea from "./InputArea";
+import handlePostAction from "../../ExpressProxy/PostList";
+
 
 function TodoListLayout({match}){
     const [listItems, setItems] = useState([]);
     const [isExpanded, setExpanded] = useState(false);
     const list = useSelector(state => state.list.list);
-    const items = list.items;
-    //need to use hook for listing items
-    
-
+    var items = list.items;
     const projTitle = match.params.projName;
-    // const items = [];
-    // for (var i=0; i<listItems.length; i++){
-    //     if(listItems[i].name === projTitle){
-    //         items.push(listItems[i]);
-    //     }
-    // }
-
+    const dispatch = useDispatch();
+    // const newItem = {name: projTitle, item: ""};
+    // const poststate = { post: newItem, resToPost:""};
+  
+    
    function loadToDoList(){
-    if(items != null){
+    //dispatch(GetTodoList(projTitle));
+    //items = list.items;
+    if(items != null && items.length>listItems.length){
+        
         setItems(items);
-        setExpanded(!isExpanded);
+
     }
+   }
+
+   function handleExpend(){
+        loadToDoList();
+        setExpanded(!isExpanded);
    }
 
    function addItem(inputText, setInputText){
         setItems(prevItems => {
             return [...prevItems, inputText];
         });
+        const res = handlePostAction(inputText, projTitle);
+        //loadToDoList();
         setInputText("");
    }
+
     return(
         <div >
-            <div className="box" id="heading" onClick={loadToDoList}>
+            <div className="box" id="heading" onClick={handleExpend}>
                 <h1 id="todoListH1">{projTitle}</h1>
             </div>
             {isExpanded ? (
