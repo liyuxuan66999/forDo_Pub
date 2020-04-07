@@ -150,6 +150,25 @@ app.post("/list", function(req,res){
 
 });
 
+app.put("/list/:projName", function(req,res){
+    const projName = req.params.projName;
+    const itemList = req.body.post;
+    List.updateOne(
+        {name: projName},
+        {$set: {'items': itemList}},
+        {upsert: true},
+        function(err){
+            if(!err){
+                res.send("Updated successfully");
+            }else{
+                res.send(err);
+            }
+            
+        })
+
+
+});
+
 app.listen(port, function(){
     console.log('Server started on port:'+port);
 });

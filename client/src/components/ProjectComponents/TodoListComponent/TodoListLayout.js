@@ -4,6 +4,7 @@ import TodoItemDetail from "./TodoItemDetail";
 import GetTodoList from '../../ExpressProxy/GetTodoList';
 import InputArea from "./InputArea";
 import handlePostAction from "../../ExpressProxy/PostList";
+import handleUpdateAction from "../../ExpressProxy/PutList";
 
 
 function TodoListLayout({match}){
@@ -36,9 +37,23 @@ function TodoListLayout({match}){
         setItems(prevItems => {
             return [...prevItems, inputText];
         });
-        const res = handlePostAction(inputText, projTitle);
+        //const res = handlePostAction(inputText, projTitle);
         //loadToDoList();
         setInputText("");
+   }
+
+   function deleteItem(id){
+    setItems(prevItems => {
+        return prevItems.filter((item, index) => {
+            return index !== id; 
+        });
+    });
+    
+    //sendUpdate();
+   }
+   
+   function sendUpdate(){
+    const res = handleUpdateAction(listItems, projTitle);
    }
 
     return(
@@ -52,14 +67,19 @@ function TodoListLayout({match}){
                         <ul>
                         {listItems.map((TodoItem, index) => (
                             <TodoItemDetail 
+                                key = {index}
                                 id = {index} 
                                 item = {TodoItem}
+                                onChecked = {deleteItem}
                                 />
                         ))}
                         </ul>
                     </div>
                     <div className="item">
                         <InputArea handleClick={addItem} />
+                    </div>
+                    <div className="item">
+                        <button onClick={sendUpdate}>Confirmr</button>
                     </div>
             </div>
             ) : null}
