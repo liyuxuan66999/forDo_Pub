@@ -69,52 +69,33 @@ footer p {
   cursor: pointer;
   outline: none;
 }
-
-#todo .tile {
-  background: #e6dd37;
+.tile {
   border-radius: 7px;
   box-shadow: 0 2px 5px #ccc;
   padding: 60px;
   width: 340px;
   margin: 16px;
   float: left;
+}
+#todo .tile {
+  background: #e6dd37;
 }
 #legalreview .tile {
   background: #34a1db;
-  border-radius: 7px;
-  box-shadow: 0 2px 5px #ccc;
-  padding: 60px;
-  width: 340px;
-  margin: 16px;
-  float: left;
 }
 #auditorreview .tile {
   background: #b08ff7;
-  border-radius: 7px;
-  box-shadow: 0 2px 5px #ccc;
-  padding: 60px;
-  width: 340px;
-  margin: 16px;
-  float: left;
 }
 #debug .tile {
   background: #f57c3b;
-  border-radius: 7px;
-  box-shadow: 0 2px 5px #ccc;
-  padding: 60px;
-  width: 340px;
-  margin: 16px;
-  float: left;
 }
 #closed .tile {
   background: #36e390;
-  border-radius: 7px;
-  box-shadow: 0 2px 5px #ccc;
-  padding: 60px;
-  width: 340px;
-  margin: 16px;
-  float: left;
 }
+#create .tile{
+  background: #e7ecea;
+}
+
 .tile h1 {
   font-size: 1.5em;
   margin-bottom: 6px;
@@ -199,6 +180,11 @@ div.item {
   border-bottom: 0;
 }
 
+.wrapper {
+  text-align: center;
+}
+
+
 input[type="checkbox"]{
   margin: 20px;
 }
@@ -224,6 +210,9 @@ input[type="checkbox"]{
   font-size: 30px;
   padding-bottom: 6px;
   border-width: 0;
+}
+#createnewproj {
+  color: rgb(178, 187, 51);
 }
 
 p {

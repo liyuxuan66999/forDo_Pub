@@ -44,7 +44,13 @@ function ProjectsLayout (){
                 </Link>
                 </div>
              </div> 
-            
+             <div id = "create">
+                <div className="tile">
+                <Link className="Link" id="createnewproj" to={"/newproj"} >
+                    Create New
+                </Link>
+                </div>
+             </div> 
             
         </div>
     )

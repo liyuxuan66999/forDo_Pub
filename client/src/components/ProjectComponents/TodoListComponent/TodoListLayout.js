@@ -5,7 +5,7 @@ import GetTodoList from '../../ExpressProxy/GetTodoList';
 import InputArea from "./InputArea";
 import handlePostAction from "../../ExpressProxy/PostList";
 import handleUpdateAction from "../../ExpressProxy/PutList";
-
+import Button from '@material-ui/core/Button';
 
 function TodoListLayout({match}){
     const [listItems, setItems] = useState([]);
@@ -77,14 +77,18 @@ function TodoListLayout({match}){
                     </div>
                     <div className="item">
                         <InputArea handleClick={addItem} />
+                        
                     </div>
-                    <div className="item">
-                        <button onClick={sendUpdate}>Confirmr</button>
+                    <div className="wrapper">
+                    <Button variant="contained" color="primary" onClick={sendUpdate}>
+                        save
+                    </Button>
+                        
                     </div>
-            </div>
+                </div>
             ) : null}
             
-
+            
         </div>
     )
 }

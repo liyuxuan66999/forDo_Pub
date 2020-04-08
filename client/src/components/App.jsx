@@ -24,6 +24,7 @@ function App(){
             <Route path="/dashboard" exact component = {ProjectsLayout} />
             <Route path="/projects/:status" component = {ProjectList} />
             <Route path="/todolist/:projName" component = {TodoListLayout} />
+            <Route path="/newproj" component={null} />
             <Route component={ProjectsLayout} />
             </Switch>
             <Footer />
