@@ -120,15 +120,15 @@ app.post("/login", function(req,res){
 
 app.post("/project", function(req,res){
     
-    const {title, status, owner, assignee, jira, palamida} = req.body;
+    const {projName, projStatus, projOwner, projAssignee, projJira, projPala} = req.body.post;
     //const projTitle = __.capitalize(title);
     const insertProj = new Project({
-        title: title, 
-        status: status,
-        owner: owner,
-        assignee: assignee,
-        jira: jira,
-        palamida: palamida
+        title: projName, 
+        status: projStatus,
+        owner: projOwner,
+        assignee: projAssignee,
+        jira: projJira,
+        palamida: projPala
         //comments: comments
     });
     insertProj.save();

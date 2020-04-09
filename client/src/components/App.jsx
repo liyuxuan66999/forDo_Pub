@@ -5,12 +5,11 @@ import Postlogin from "./ExpressProxy/Postlogin";
 import Header from "./Header";
 import Footer from "./Footer";
 import TodoListLayout from "./ProjectComponents/TodoListComponent/TodoListLayout";
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import {useSelector, useDispatch} from "react-redux";
-//import ProjectsLayout from "./AppLayout";
 import ProjectsLayout from "./ProjectsLayout";
 import ProjectList from "./ProjectList";
+import NewProjectForm from "./ProjectComponents/NewProjectForm";
 
 function App(){
     const isLoggedin = useSelector(state => state.auth);
@@ -24,7 +23,7 @@ function App(){
             <Route path="/dashboard" exact component = {ProjectsLayout} />
             <Route path="/projects/:status" component = {ProjectList} />
             <Route path="/todolist/:projName" component = {TodoListLayout} />
-            <Route path="/newproj" component={null} />
+            <Route path="/newproj" component={NewProjectForm} />
             <Route component={ProjectsLayout} />
             </Switch>
             <Footer />
