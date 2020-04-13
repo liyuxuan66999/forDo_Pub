@@ -7,6 +7,7 @@ import handlePostAction from "../../ExpressProxy/PostList";
 import handleUpdateAction from "../../ExpressProxy/PutList";
 import Button from '@material-ui/core/Button';
 
+
 function TodoListLayout({match}){
     const [listItems, setItems] = useState([]);
     const [isExpanded, setExpanded] = useState(false);
@@ -54,6 +55,7 @@ function TodoListLayout({match}){
    
    function sendUpdate(){
     const res = handleUpdateAction(listItems, projTitle);
+    dispatch(GetTodoList(projTitle));
    }
 
     return(
