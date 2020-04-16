@@ -214,6 +214,9 @@ input[type="checkbox"]{
 #createnewproj {
   color: rgb(178, 187, 51);
 }
+#editbutton {
+  text-align: right;
+}
 
 p {
   margin: 0;
