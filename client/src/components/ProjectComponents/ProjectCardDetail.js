@@ -14,6 +14,7 @@ import TextField from '@material-ui/core/TextField';
 import {useSelector, useDispatch} from "react-redux";
 import ClearIcon from '@material-ui/icons/Clear';
 import SaveIcon from '@material-ui/icons/Save';
+import updateProject from '../ExpressProxy/PutProject';
 
 function ProjectCardDetail(props){
     const projTitle = props.proj.title;
@@ -22,7 +23,18 @@ function ProjectCardDetail(props){
     const [isEditing, setEditMode] = useState(false);
     const [isExpanded, setExpanded] = useState(false);
     const list = useSelector(state => state.list.list);
-    
+    //in case some collumns are null from props.proj
+    const projTemplate = {
+        _id: props.proj._id,
+        title: projTitle,
+        owner: props.proj.owner,
+        status: props.proj.status,
+        assignee: props.proj.assignee,
+        jira: props.proj.jira,
+        palamida: props.proj.palamida
+    }
+
+    const [proj, setProj] = useState(projTemplate);
     function clickEvent(){
         //editing mode dont have access to the todolist
         if(!isEditing){
@@ -33,7 +45,27 @@ function ProjectCardDetail(props){
         setExpanded(!isExpanded);
     }
     function enableEditMode(){
-        setEditMode(!isEditing);
+        setEditMode(true);
+    }
+    function disableEditMode(){
+        setProj(projTemplate);
+        setEditMode(false);
+    }
+
+    function handleChange(event){
+        const {name, value} = event.target;
+        setProj(preProj => {
+            return {
+                ...preProj,
+                [name]: value
+            };
+        });
+    }
+
+    function sendUpdate(){
+        const res = updateProject(proj);
+        setEditMode(false);
+        //maybe it make sence to bring it back to the previouse page to reload the project
     }
 
     return(
@@ -47,12 +79,14 @@ function ProjectCardDetail(props){
                     {isExpanded ? (
                     <div>
                     {isEditing ? (
-                    <div onClick={null}>
+                    <div onClick={sendUpdate}>
                         <SaveIcon /> 
                     </div>): null}
                     
-                    <div id="editbutton" onClick={enableEditMode}>
-                        {isEditing ? <ClearIcon />:<EditIcon />}
+                    <div id="editbutton">
+                        {isEditing ? 
+                        <ClearIcon onClick={disableEditMode}/>:
+                        <EditIcon onClick={enableEditMode} />}
                         
                     </div>
                     <Typography variant="body2" color="textSecondary" component="p">
@@ -65,9 +99,10 @@ function ProjectCardDetail(props){
                             InputProps={{
                                 readOnly: true,
                             }} 
-                            defaultValue={props.proj.owner} />
+                            defaultValue={proj.owner}
+                            />
                             </div>):
-                            (<div>{props.proj.owner}</div>)} 
+                            (<div>{proj.owner}</div>)} 
                          
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
@@ -79,9 +114,12 @@ function ProjectCardDetail(props){
                             InputProps={{
                                 readOnly: false,
                             }} 
-                            defaultValue={props.proj.status} />
+                            defaultValue={proj.status}
+                            name="status" 
+                            value={proj.status} 
+                            onChange={handleChange}/>
                             </div>):
-                            (<div>{props.proj.status}</div>)} 
+                            (<div>{proj.status}</div>)} 
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                         Assignee: 
@@ -92,9 +130,12 @@ function ProjectCardDetail(props){
                             InputProps={{
                                 readOnly: false,
                             }} 
-                            defaultValue={props.proj.assignee} />
+                            defaultValue={proj.assignee} 
+                            name="assignee" 
+                            value={proj.assignee} 
+                            onChange={handleChange}/>
                             </div>):
-                            (<div>{props.proj.assignee}</div>)} 
+                            (<div>{proj.assignee}</div>)} 
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                         Jira: 
@@ -105,9 +146,12 @@ function ProjectCardDetail(props){
                             InputProps={{
                                 readOnly: false,
                             }} 
-                            defaultValue={props.proj.jira} />
+                            defaultValue={proj.jira} 
+                            name="jira" 
+                            value={proj.jira} 
+                            onChange={handleChange}/>
                             </div>):
-                            (<div>{props.proj.jira}</div>)}
+                            (<div>{proj.jira}</div>)}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                         Palamida: 
@@ -118,9 +162,12 @@ function ProjectCardDetail(props){
                             InputProps={{
                                 readOnly: false,
                             }} 
-                            defaultValue={props.proj.palamida} />
+                            defaultValue={proj.palamida} 
+                            name="palamida" 
+                            value={proj.palamida} 
+                            onChange={handleChange}/>
                             </div>):
-                            (<div>{props.proj.palamida}</div>)} 
+                            (<div>{proj.palamida}</div>)} 
                     </Typography>
                     {isEditing ? 
                     null:
@@ -135,6 +182,7 @@ function ProjectCardDetail(props){
                         <Button size="small" color="primary" >
                             learned
                         </Button>
+                        
                     </CardActions>)}
                     </div>
                     ): null}

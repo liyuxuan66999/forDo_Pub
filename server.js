@@ -159,13 +159,34 @@ app.put("/list/:projName", function(req,res){
         {upsert: true},
         function(err){
             if(!err){
-                res.send("Updated successfully");
+                res.send("List lpdated successfully");
             }else{
                 res.send(err);
             }
             
         })
 
+
+});
+
+app.put("/project/:projId", function(req,res){
+    const projId = req.params.projId;
+    const {status, assignee, jira, palamida} = req.body.post;
+    Project.updateOne(
+        {_id: projId},
+        {$set: {
+            status : status,
+            assignee : assignee,
+            jira : jira,
+            palamida : palamida}},
+        function(err){
+            if(!err){
+                res.send("Project updated successfully")
+            }else{
+                res.send(err);
+            }
+        } 
+    )
 
 });
 

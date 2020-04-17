@@ -6,10 +6,6 @@ import ProjectCardDetail from "./ProjectCardDetail";
 function CreateProjectCard(project){
     
     const proj = project;
-    
-    
-    const projTitle = project.title;
-    
         
     //when disable edit mode also set expand to be false to reload todolists
    
