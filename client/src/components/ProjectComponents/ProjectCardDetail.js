@@ -15,6 +15,7 @@ import {useSelector, useDispatch} from "react-redux";
 import ClearIcon from '@material-ui/icons/Clear';
 import SaveIcon from '@material-ui/icons/Save';
 import updateProject from '../ExpressProxy/PutProject';
+import Getprojects from '../ExpressProxy/Getprojects';
 
 function ProjectCardDetail(props){
     const projTitle = props.proj.title;
@@ -65,7 +66,9 @@ function ProjectCardDetail(props){
     function sendUpdate(){
         const res = updateProject(proj);
         setEditMode(false);
-        //maybe it make sence to bring it back to the previouse page to reload the project
+        //dispatch will trigger useSelector call and re-render the hook
+        dispatch(Getprojects());
+        
     }
 
     return(

@@ -90,7 +90,7 @@ app.post("/register", function(req, res){
             res.send(err);
         }else{
             passport.authenticate("local")(req, res, function(){
-                res.send("Registered!");
+                res.send("OK");
             })
         }
     })
@@ -181,7 +181,7 @@ app.put("/project/:projId", function(req,res){
             palamida : palamida}},
         function(err){
             if(!err){
-                res.send("Project updated successfully")
+                res.send("OK")
             }else{
                 res.send(err);
             }
