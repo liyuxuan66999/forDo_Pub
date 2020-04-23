@@ -16,6 +16,13 @@ function ProjectsLayout (){
                 </Link>
                 </div>
             </div>
+            <div id = "auditing">
+                <div className="tile">
+                <Link className="Link" to={"/projects/A"} >
+                    Analyzed
+                </Link>
+                </div>
+             </div>
             <div id = "legalreview">
                 <div className="tile">
                 <Link className="Link" to={"/projects/L"} >

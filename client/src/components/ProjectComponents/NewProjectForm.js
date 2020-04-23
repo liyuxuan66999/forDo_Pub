@@ -3,6 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import handlePostProject from '../ExpressProxy/PostNewProject';
+//import {useDispatch}from "react-redux"; 
+//import {loggedin} from "../Actions";
+//import Getprojects from "../ExpressProxy/Getprojects";
+
 const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
@@ -14,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 function NewProjectForm() {
     const classes = useStyles();
+    //const dispatch = useDispatch();
     const newProj = {
         projName:"", 
         projStatus: "",
@@ -36,6 +41,11 @@ function NewProjectForm() {
 
     function handleSubmit(){
         const res = handlePostProject(proj);
+        //if(body==="OK"){
+            //dispatch(loggedin());
+            //dispatch(Getprojects());
+            
+        //}
     }
     return (
         <div>
@@ -87,12 +97,7 @@ function NewProjectForm() {
                 Submit
             </Button>
         </div>
-        <h1>{proj.projName}</h1>
-        <h1>{proj.projStatus}</h1>
-        <h1>{proj.projOwner}</h1>
-        <h1>{proj.projAssignee}</h1>
-        <h1>{proj.projJira}</h1>
-        <h1>{proj.projPala}</h1>
+        
         </div>);
 }
 

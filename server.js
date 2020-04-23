@@ -132,7 +132,7 @@ app.post("/project", function(req,res){
         //comments: comments
     });
     insertProj.save();
-    res.send("/home")
+    res.send("OK")
 
 });
 app.post("/list", function(req,res){

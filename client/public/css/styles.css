@@ -80,6 +80,9 @@ footer p {
 #todo .tile {
   background: #e6dd37;
 }
+#auditing .tile {
+  background: #e7ecea;
+}
 #legalreview .tile {
   background: #34a1db;
 }
