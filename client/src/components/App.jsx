@@ -10,7 +10,7 @@ import {useSelector, useDispatch} from "react-redux";
 import ProjectsLayout from "./ProjectsLayout";
 import ProjectList from "./ProjectList";
 import NewProjectForm from "./ProjectComponents/NewProjectForm";
-
+import Nav from "./Navigation";
 function App(){
     const isLoggedin = useSelector(state => state.auth);
     //option 1
@@ -19,12 +19,13 @@ function App(){
         <Router>
         <div>
             <Header />
+            <Nav />
             <Switch>  
-            <Route path="/dashboard" exact component = {ProjectsLayout} />
-            <Route path="/projects/:status" component = {ProjectList} />
-            <Route path="/todolist/:projName" component = {TodoListLayout} />
-            <Route path="/newproj" component={NewProjectForm} />
-            <Route component={ProjectsLayout} />
+                <Route path="/dashboard" exact component = {ProjectsLayout} />
+                <Route path="/projects/:status" component = {ProjectList} />
+                <Route path="/todolist/:projName" component = {TodoListLayout} />
+                <Route path="/newproj" component={NewProjectForm} />
+                <Route component={ProjectsLayout} />
             </Switch>
             <Footer />
         </div>

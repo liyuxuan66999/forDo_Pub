@@ -38,6 +38,23 @@ footer {
 footer p {
   color: #ccc;
 }
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: rgb(138, 137, 137);
+  color: #e7ecea;
+}
+.nav-links {
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+}
+
 .note {
   background: #fff;
   border-radius: 7px;
