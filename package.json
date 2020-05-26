@@ -13,6 +13,9 @@
   },
   "author": "TonyLi",
   "license": "ISC",
+  "engines": {
+    "node": "12.10.0"
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "concurrently": "^5.2.0",

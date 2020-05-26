@@ -195,7 +195,7 @@ app.put("/project/:projId", function(req,res){
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'));
 }
-
+//app.use(express.static('client/build'));
 app.listen(port, function(){
     console.log('Server started on port:'+port);
 });
