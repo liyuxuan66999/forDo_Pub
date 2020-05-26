@@ -26,7 +26,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect(AtlasConnection, {useNewUrlParser:true});
+mongoose.connect(localDBConnection, {useNewUrlParser:true});
 mongoose.set("useCreateIndex", true);
 
 
