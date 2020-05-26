@@ -9,6 +9,8 @@ const TodoListDBSchema = require(__dirname+"/DBSchemas/ToDoListSchema.js");
 const ProjectDBSchema = require(__dirname+"/DBSchemas/ProjectSchema.js");
 const app = express();
 const port = process.env.PORT || 5000;
+const AtlasConnection = "mongodb+srv://liyuxuan6699:lyx19900@liyuxuan6699-k6lag.mongodb.net/fordoDB"; 
+const localDBConnection = "mongodb://localhost:27017/fordoDB";
 
 
 app.use(bodyParser.json());
@@ -24,7 +26,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/fordoDB", {useNewUrlParser:true});
+mongoose.connect(AtlasConnection, {useNewUrlParser:true});
 mongoose.set("useCreateIndex", true);
 
 
@@ -189,6 +191,10 @@ app.put("/project/:projId", function(req,res){
     )
 
 });
+
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/build'));
+}
 
 app.listen(port, function(){
     console.log('Server started on port:'+port);
